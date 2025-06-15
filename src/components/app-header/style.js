@@ -27,7 +27,7 @@ export const HeaderLeft = styled.div`
     display: block;
     width: 176px;
     height: 69px;
-    background-position: 0 0; 
+    background-position: 0 0;
   }
 
   .select-list {
