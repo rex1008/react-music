@@ -31,7 +31,7 @@ export default memo(function MCAppHeader() {
     <HeaderWrapper>
       <div className='content wrap-v1'>
         <HeaderLeft>
-          <a href="#/" className='logo sprite_01'></a>
+          <a href="#/" className='logo sprite_01'> </a>
           <div className='select-list'>
             {
               headerLinks.map((item, index) => {

@@ -1,9 +1,18 @@
 import React, { memo } from 'react'
 
+import { 
+  DiscoverWrapper,
+  TopMenu
+ } from './style'
+
 export default memo(function MCDiscover() {
   return (
-    <div>
-      <h2>MCDiscover发现音乐</h2>
-    </div>
+    <DiscoverWrapper>
+      <div className='top'>
+        <TopMenu className='wrap-v1'>
+          discover music conent
+        </TopMenu>
+      </div>
+    </DiscoverWrapper>
   )
 })
