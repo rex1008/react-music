@@ -5,8 +5,8 @@ import { renderRoutes } from 'react-router-config'
 
 import routes from './router'
 
-import MCAppHeader from '@/components/app-header'
-import MCAppFooter from '@/components/app-footer'
+import MCAppHeader from './components/app-header'
+import MCAppFooter from './components/app-footer'
 
 export default memo(function App() {
   return (
