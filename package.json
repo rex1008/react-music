@@ -15,9 +15,12 @@
     "normalize.css": "^8.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-redux": "7.2.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "5.0.1",
+    "redux": "4.0.5",
+    "redux-thunk": "2.3.0",
     "styled-components": "^6.1.17",
     "web-vitals": "^2.1.4"
   },
