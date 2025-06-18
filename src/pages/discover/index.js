@@ -10,18 +10,7 @@ import {
   TopMenu
  } from './style'
 
- import request from '../../services/request'
-
 export default memo(function MCDiscover(props) {
-  console.log(props)
-
-  useEffect(() => {
-    request({
-      url: "/banner"
-    }).then(res => {
-      console.log(res)
-    })
-  }, [])
 
   const { route } = props;
 
