@@ -49,7 +49,7 @@ export const FooterRight = styled.ul`
       width: 50px;
       height: 45px;
 
-      background-image: url(${require("@/assets/img/sprite_footer_02.png")});
+      background-image: url(${require("../../assets/img/sprite_footer_02.png")});
       background-size: 110px 450px;
     }
 
@@ -59,10 +59,10 @@ export const FooterRight = styled.ul`
     :nth-child(2) .link {
       background-position: 0 0;
     }
-    :nth-child(2) .link {
+    :nth-child(3) .link {
       background-position: -60px -50px;
     }
-    :nth-child(2) .link {
+    :nth-child(4) .link {
       background-position: 0 -101px;
     }
 
