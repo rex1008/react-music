@@ -1,13 +1,13 @@
 import React, { memo, useEffect } from 'react'
 
 import { getTopBannerAction } from './store/actionCreators'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 function MCRecommend(props) {
 
   const { topBanners } = useSelector(state => ({
-    topBanners: state.recommend.topBanners
-  }))
+    topBanners: state.recommend.get("topBanners")
+  }), shallowEqual)
 
   const dispatch = useDispatch()
 
