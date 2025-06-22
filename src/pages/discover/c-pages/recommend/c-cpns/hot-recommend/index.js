@@ -4,6 +4,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { HOT_RECOMMEND_LIMIT } from '../../../../../../common/constants'
 
 import ThemeHeaderRCM from './../../../../../../components/theme-header-rcm'
+import SongsCover from './../../../../../../components/songs-cover'
+
 
 import { 
   HotRecommendWrapper
@@ -30,7 +32,7 @@ export default memo(function HotRecommend() {
         {
           hotRecommends.map((item, index) => {
             console.log(item)
-            return <div key={index}>{item.name}</div>
+            return <SongsCover key={item.id} info={item} />
           })
         }
       </div>
