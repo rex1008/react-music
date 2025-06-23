@@ -2,7 +2,8 @@ import * as actionTypes from "./constants"
 
 import { 
   getTopBanners,
-  getHotRecommends
+  getHotRecommends,
+  getNewAlbums
  } from '../../../../../services/recommend'
 
 const changeTopBannerAction = (res) => ({
@@ -13,6 +14,11 @@ const changeTopBannerAction = (res) => ({
 const changeHotRecommendAction = (res) => ({
   type: actionTypes.CHANGE_HOT_RECOMMEND,
   hotRecommends: res.data.result
+})
+
+const changeNewAlbumAction = (res) => ({
+  type: actionTypes.CHANGE_NEW_ALBUM,
+  newAlbums: res.data.albums
 })
 
 
@@ -32,5 +38,13 @@ export const getHotRecommendAction = (limit) => {
       dispatch(changeHotRecommendAction(res))
     })
   }
+}
 
+export const getNewAlbumAction = (limit) => {
+  return dispatch => {
+    getNewAlbums(limit).then(res => {
+      //console.log(res)
+      dispatch(changeNewAlbumAction(res))
+    })
+  }
 }
