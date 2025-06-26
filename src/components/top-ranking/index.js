@@ -45,7 +45,9 @@ export default memo(function TopRanking(props) {
           })
         }
       </div>
-      <div className='footer'></div>
+      <div className='footer'>
+        <a href="/todo">查看全部 &gt</a>
+      </div>
     </TopRankingWrapper>
   )
 })
