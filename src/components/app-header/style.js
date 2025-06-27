@@ -43,9 +43,9 @@ export const HeaderLeft = styled.div`
         color: #ccc;
       }
 
-      :last-of-type a {
+      &:last-of-type a {
         position: relative;
-        ::after {
+        &::after {
           position: absolute;
           content: "";
           width: 28px;

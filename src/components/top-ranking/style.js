@@ -64,7 +64,7 @@ export const TopRankingWrapper = styled.div`
         font-size: 16px;
       }
 
-      body>:nth-child(-n+3) .rank {
+      &:nth-child(-n+3) .rank {
         color: #c10d0c;
       }
 

@@ -4,8 +4,6 @@ import { getSizeImage } from '../../utils/format-utils'
 
 import { TopRankingWrapper } from './style'
 
-import "../../assets/css/temp.css";
-
 export default memo(function TopRanking(props) {
   const { info, size = 80 } = props
 
