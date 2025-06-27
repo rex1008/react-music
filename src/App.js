@@ -10,6 +10,8 @@ import store from './store'
 import MCAppHeader from './components/app-header'
 import MCAppFooter from './components/app-footer'
 
+import AppPlayerBar from './pages/player/app-player-bar'
+
 export default memo(function App() {
   return (
     <Provider store={store}>
@@ -17,6 +19,7 @@ export default memo(function App() {
         <MCAppHeader/>
         {renderRoutes(routes)}
         <MCAppFooter/>
+        <AppPlayerBar/>
       </HashRouter>
     </Provider>
   )
