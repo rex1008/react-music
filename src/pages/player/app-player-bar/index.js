@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 
 import { Slider } from 'antd'
 
@@ -8,8 +8,27 @@ import {
   PlayInfo,
   Operator
  } from './style'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { getSongDetailAction } from '../store/actionCreators'
+import { getSizeImage } from '../../../utils/format-utils'
 
 export default memo(function AppPlayerBar() {
+
+  // const { currentSong } = useSelector(state => ({
+  //   currentSong: state.player.get("currentSong")
+  // }), shallowEqual)
+
+  const { currentSong } = useSelector(state => {
+    console.log("currentSong", state.player.get("currentSong"))
+    return {currentSong: state.player.get("currentSong")}
+  }, shallowEqual)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getSongDetailAction(167876))
+  }, [dispatch ])
+
   return (
     <PlaybarWrapper className='sprite_player'>
       <div className='content wrap-v2'>
@@ -21,7 +40,7 @@ export default memo(function AppPlayerBar() {
         <PlayInfo>
           <div className='image'>
             <a href="/#">
-              <img src="https://p2.music.126.net/OVkXDNmbk2uj6wE1KTZIwQ==/109951165203334337.jpg?param=34y34" alt="" />
+              <img src={currentSong.al && getSizeImage(currentSong.al.picUrl, 35)} alt="" />
             </a>
           </div>
           <div className='info'>
