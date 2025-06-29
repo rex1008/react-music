@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 
 import { Slider } from 'antd'
 
@@ -10,31 +10,62 @@ import {
  } from './style'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getSongDetailAction } from '../store/actionCreators'
-import { getSizeImage } from '../../../utils/format-utils'
+import { getSizeImage, formatMinuteSecond, getPlaySong } from '../../../utils/format-utils'
 
 export default memo(function AppPlayerBar() {
 
-  // const { currentSong } = useSelector(state => ({
-  //   currentSong: state.player.get("currentSong")
-  // }), shallowEqual)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [isChanging, setIsChaning] = useState(false)
 
-  const { currentSong } = useSelector(state => {
-    console.log("currentSong", state.player.get("currentSong"))
-    return {currentSong: state.player.get("currentSong")}
-  }, shallowEqual)
+  const { currentSong } = useSelector(state => ({
+    currentSong: state.player.get("currentSong")
+  }), shallowEqual)
 
   const dispatch = useDispatch()
+
+  const audioRef = useRef()
 
   useEffect(() => {
     dispatch(getSongDetailAction(167876))
   }, [dispatch ])
+
+  const duration = currentSong.dt || 0
+  const showOfDuration = formatMinuteSecond(duration)
+
+  const playMusic = () => {
+    audioRef.current.src = getPlaySong(currentSong.id)
+    audioRef.current.play()
+  }
+
+  const timeUpdate = (e) => {
+    console.log(e.target.currentTime)
+    setCurrentTime(e.target.currentTime * 1000)
+    if (!isChanging) {
+      setProgress(currentTime / currentSong.dt * 100)
+    }
+  }
+
+  const sliderChange = useCallback(value => {
+    console.log(value)
+    setIsChaning(true)
+    setProgress(value)
+  }, [])
+
+  const sliderAfterChange = useCallback(value => {
+    console.log("aftervalue:", value)
+    const ct = value / 100 * duration / 1000
+    audioRef.current.currentTime = ct
+    setCurrentTime(ct * 1000)
+    setIsChaning(false)
+  }, [duration])
 
   return (
     <PlaybarWrapper className='sprite_player'>
       <div className='content wrap-v2'>
         <Control>
           <button className='sprite_player prev'></button>
-          <button className='sprite_player play'></button>
+          <button className='sprite_player play' onClick={e => playMusic()}></button>
           <button className='sprite_player next'></button>
         </Control>
         <PlayInfo>
@@ -45,15 +76,19 @@ export default memo(function AppPlayerBar() {
           </div>
           <div className='info'>
             <div className='song'>
-              <span className='song-name'>红豆</span>
-              <a href='/#' className='singer-name'>要不要买菜</a>
+              <span className='song-name'>{currentSong.name}</span>
+              <a href='/#' className='singer-name'>{currentSong.ar && currentSong.ar[0].name}</a>
             </div>
             <div className='progress'>
-              <Slider defaultValue={30} />
+              <Slider 
+                defaultValue={30} 
+                value={progress}
+                onChange={sliderChange}
+                onAfterChange={sliderAfterChange} />
               <div className='time'>
-                <span className='now-time'>1:30</span>
+                <span className='now-time'>{formatMinuteSecond(currentTime)}</span>
                 <span className='divider'>/</span>
-                <span className='duration'>4:30</span>
+                <span className='duration'>{showOfDuration}</span>
               </div>
             </div>
           </div>
@@ -70,6 +105,7 @@ export default memo(function AppPlayerBar() {
           </div>
         </Operator>
       </div>
+      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
     </PlaybarWrapper>
   )
 })
