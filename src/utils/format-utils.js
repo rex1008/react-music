@@ -49,5 +49,5 @@ export function formatMinuteSecond(time) {
 
 export function getPlaySong(id) {
   //return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
-  return "https://er-sycdn.kuwo.cn/79b368e218e73d621aca9ec7a6d594cc/686158ae/resource/30106/trackmedia/M500001wPVuM2m2Vto.mp3"
+  return "https://er-sycdn.kuwo.cn/7eb5be8438e405175a05841d5c3a0bd5/6862b24b/resource/30106/trackmedia/M500001wPVuM2m2Vto.mp3"
 }

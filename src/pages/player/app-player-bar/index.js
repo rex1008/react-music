@@ -11,12 +11,14 @@ import {
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getSongDetailAction } from '../store/actionCreators'
 import { getSizeImage, formatMinuteSecond, getPlaySong } from '../../../utils/format-utils'
+import { NavLink } from 'react-router-dom'
 
 export default memo(function AppPlayerBar() {
 
   const [currentTime, setCurrentTime] = useState(0)
   const [progress, setProgress] = useState(0)
   const [isChanging, setIsChaning] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const { currentSong } = useSelector(state => ({
     currentSong: state.player.get("currentSong")
@@ -30,18 +32,22 @@ export default memo(function AppPlayerBar() {
     dispatch(getSongDetailAction(167876))
   }, [dispatch ])
 
+  useEffect(() => {
+    audioRef.current.src = getPlaySong(currentSong.id)
+  }, [currentSong])
+
   const duration = currentSong.dt || 0
   const showOfDuration = formatMinuteSecond(duration)
 
-  const playMusic = () => {
-    audioRef.current.src = getPlaySong(currentSong.id)
-    audioRef.current.play()
-  }
+  const playMusic = useCallback(() => {
+    isPlaying ? audioRef.current.pause() : audioRef.current.play()
+    setIsPlaying(!isPlaying)
+  }, [isPlaying])
 
   const timeUpdate = (e) => {
     console.log(e.target.currentTime)
-    setCurrentTime(e.target.currentTime * 1000)
     if (!isChanging) {
+      setCurrentTime(e.target.currentTime * 1000)
       setProgress(currentTime / currentSong.dt * 100)
     }
   }
@@ -49,8 +55,10 @@ export default memo(function AppPlayerBar() {
   const sliderChange = useCallback(value => {
     console.log(value)
     setIsChaning(true)
+    const ct = value / 100 * duration
+    setCurrentTime(ct)
     setProgress(value)
-  }, [])
+  }, [duration])
 
   const sliderAfterChange = useCallback(value => {
     console.log("aftervalue:", value)
@@ -58,21 +66,25 @@ export default memo(function AppPlayerBar() {
     audioRef.current.currentTime = ct
     setCurrentTime(ct * 1000)
     setIsChaning(false)
-  }, [duration])
+
+    if (!isPlaying) {
+      playMusic()
+    }
+  }, [duration, isPlaying, playMusic])
 
   return (
     <PlaybarWrapper className='sprite_player'>
       <div className='content wrap-v2'>
-        <Control>
+        <Control isPlaying={isPlaying}>
           <button className='sprite_player prev'></button>
           <button className='sprite_player play' onClick={e => playMusic()}></button>
           <button className='sprite_player next'></button>
         </Control>
         <PlayInfo>
           <div className='image'>
-            <a href="/#">
+            <NavLink to="/discover/player">
               <img src={currentSong.al && getSizeImage(currentSong.al.picUrl, 35)} alt="" />
-            </a>
+            </NavLink>
           </div>
           <div className='info'>
             <div className='song'>
