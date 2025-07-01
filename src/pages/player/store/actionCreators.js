@@ -2,6 +2,8 @@ import { getSongDetail } from '../../../services/player'
 
 import * as actionTypes from './constants'
 
+import { getRandomNumber } from '../../../utils/math-utils'
+
 const changeCurrentSongAction = (currentSong) => {
   return {
     type: actionTypes.CHANGE_CURRENT_SONG,
@@ -18,6 +20,43 @@ const changeCurrentSongIndexAction = (currentSongIndex) => ({
   type: actionTypes.CHANGE_CURRENT_SONG_INDEX,
   currentSongIndex
 })
+
+export const changePlayStrategyAction = playStrategy => ({
+  type: actionTypes.CHANGE_PLAY_STRATEGY,
+  playStrategy
+})
+
+export const switchSongAction = tag => {
+  console.log("tag:", tag)
+  return (dispatch, getState) => {
+    const playList = getState().player.get("playList")
+    const playStrategy = getState().player.get("playStrategy")
+    const currentSongIndex = getState().player.get("currentSongIndex")
+    let nextSongIndex = -1
+
+    switch (playStrategy) {
+      case 1: // 随机播放
+        let randomIndex = -1
+        while (randomIndex === currentSongIndex) {
+          randomIndex = getRandomNumber(playList.length)
+        }
+        nextSongIndex = randomIndex
+        break
+      default: // 顺序播放
+        nextSongIndex = currentSongIndex + tag
+        if (nextSongIndex >= playList.length) {
+          nextSongIndex = 0 // 处于最后一首时，切换下一首跳到第一首
+        }
+        if (nextSongIndex < 0) {
+          nextSongIndex = playList.length - 1 // 处于第一首时，切换上一首跳到最后一首
+        }
+    }
+
+    const nextSong = playList[nextSongIndex]
+    dispatch(changeCurrentSongIndexAction(nextSongIndex))
+    dispatch(changeCurrentSongAction(nextSong))
+  }
+}
 
 export const getSongDetailAction = (ids) => {
   // getSongDetailAction只是返回一个函数，函数的参数又是一个函数，名字叫dispatch，这个dispatch最终会被react-redux调用
