@@ -49,10 +49,10 @@ export function formatMinuteSecond(time) {
 
 export function getPlaySong(id) {
   //return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
-  if (id === 167876) {
-    return "https://er-sycdn.kuwo.cn/e276774b833790ea705cafe1aa2f78c1/68640ce8/resource/30106/trackmedia/M500001wPVuM2m2Vto.mp3"
-  } else if (id === 411214279) {
-    return "https://m704.music.126.net/20250702013057/9063399341df302d577c28bf430667cd/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/28481684897/91af/f1ab/2d5c/ed65b4e2771bae7fdc247dda34f2d2fa.mp3?vuutv=2GSqIaQL5/v8A7UvfgIlDQQdwT2jEpfQUjGmiLRaZ3y7AcRnST21agTPrBfs+xPO/6qZVoVvnJNAiQXK7utZ4pXYf35mCRWylGHjh3ht8VQ=&authSecret=00000197c6f3d11d04d80a3b194f436c"
+  if (id === 2720118279) {
+    return "https://music.163.com/song/media/outer/url?id=2720118279"
+  } else if (id === 2100291704) {
+    return "https://music.163.com/song/media/outer/url?id=2100291704"
   } else if (id === 2711834126) {
     return "https://music.163.com/song/media/outer/url?id=2711834126"
   } else if (id === 2712753039) {

@@ -34,7 +34,7 @@ export default memo(function AppPlayerBar() {
   const audioRef = useRef()
 
   useEffect(() => {
-    dispatch(getSongDetailAction(167876))
+    dispatch(getSongDetailAction(2720118279))
   }, [dispatch ])
 
   useEffect(() => {
@@ -50,7 +50,6 @@ export default memo(function AppPlayerBar() {
   }, [isPlaying])
 
   const timeUpdate = (e) => {
-    console.log(e.target.currentTime)
     if (!isChanging) {
       setCurrentTime(e.target.currentTime * 1000)
       setProgress(currentTime / currentSong.dt * 100)
@@ -70,7 +69,6 @@ export default memo(function AppPlayerBar() {
   }
 
   const sliderChange = useCallback(value => {
-    console.log(value)
     setIsChaning(true)
     const ct = value / 100 * duration
     setCurrentTime(ct)

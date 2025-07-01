@@ -5,6 +5,97 @@ import * as actionTypes from './constants'
 const defaultState = Map({
   playList: [
     {
+      "name": "迷失情感迷宫",
+      "mainTitle": null,
+      "additionalTitle": null,
+      "id": 2100291704,
+      "pst": 0,
+      "t": 0,
+      "ar": [
+          {
+              "id": 12008056,
+              "name": "曾舜晞",
+              "tns": [],
+              "alias": []
+          }
+      ],
+      "alia": [],
+      "pop": 100,
+      "st": 0,
+      "rt": "",
+      "fee": 8,
+      "v": 39,
+      "crbt": null,
+      "cf": "",
+      "al": {
+          "id": 179185966,
+          "name": "迷失情感迷宫",
+          "picUrl": "http://p2.music.126.net/idNpvknKlkxmEfjwvzfHHQ==/109951169058657003.jpg",
+          "tns": [],
+          "pic_str": "109951169058657003",
+          "pic": 109951169058657010
+      },
+      "dt": 202352,
+      "h": {
+          "br": 320000,
+          "fid": 0,
+          "size": 8096958,
+          "vd": -51809,
+          "sr": 44100
+      },
+      "m": {
+          "br": 192000,
+          "fid": 0,
+          "size": 4858192,
+          "vd": -49185,
+          "sr": 44100
+      },
+      "l": {
+          "br": 128000,
+          "fid": 0,
+          "size": 3238809,
+          "vd": -47444,
+          "sr": 44100
+      },
+      "sq": {
+          "br": 818017,
+          "fid": 0,
+          "size": 20691044,
+          "vd": -51805,
+          "sr": 44100
+      },
+      "hr": null,
+      "a": null,
+      "cd": "01",
+      "no": 1,
+      "rtUrl": null,
+      "ftype": 0,
+      "rtUrls": [],
+      "djId": 0,
+      "copyright": 0,
+      "s_id": 0,
+      "mark": 17179877376,
+      "originCoverType": 1,
+      "originSongSimpleData": null,
+      "tagPicList": null,
+      "resourceState": true,
+      "version": 5,
+      "songJumpInfo": null,
+      "entertainmentTags": null,
+      "awardTags": null,
+      "displayTags": null,
+      "single": 0,
+      "noCopyrightRcmd": null,
+      "alg": null,
+      "displayReason": null,
+      "rtype": 0,
+      "rurl": null,
+      "mst": 9,
+      "cp": 0,
+      "mv": 22617729,
+      "publishTime": 1700496000000
+    },
+    {
       "name": "听夜雨",
       "mainTitle": null,
       "additionalTitle": null,
@@ -12,12 +103,12 @@ const defaultState = Map({
       "pst": 0,
       "t": 0,
       "ar": [
-        {
-          "id": 30433236,
-          "name": "礼越",
-          "tns": [],
-          "alias": []
-        }
+          {
+              "id": 30433236,
+              "name": "礼越",
+              "tns": [],
+              "alias": []
+          }
       ],
       "alia": [],
       "pop": 100,
@@ -28,48 +119,48 @@ const defaultState = Map({
       "crbt": null,
       "cf": "",
       "al": {
-        "id": 274390559,
-        "name": "听夜雨",
-        "picUrl": "http://p2.music.126.net/7zw1IH8PH-rpmC4Q5yLIDw==/109951171270437148.jpg",
-        "tns": [],
-        "pic_str": "109951171270437148",
-        "pic": 109951171270437150
+          "id": 274390559,
+          "name": "听夜雨",
+          "picUrl": "http://p2.music.126.net/7zw1IH8PH-rpmC4Q5yLIDw==/109951171270437148.jpg",
+          "tns": [],
+          "pic_str": "109951171270437148",
+          "pic": 109951171270437150
       },
       "dt": 200307,
       "h": {
-        "br": 320000,
-        "fid": 0,
-        "size": 8015085,
-        "vd": -49174,
-        "sr": 48000
+          "br": 320000,
+          "fid": 0,
+          "size": 8015085,
+          "vd": -49174,
+          "sr": 48000
       },
       "m": {
-        "br": 192000,
-        "fid": 0,
-        "size": 4809069,
-        "vd": -46583,
-        "sr": 48000
+          "br": 192000,
+          "fid": 0,
+          "size": 4809069,
+          "vd": -46583,
+          "sr": 48000
       },
       "l": {
-        "br": 128000,
-        "fid": 0,
-        "size": 3206061,
-        "vd": -44905,
-        "sr": 48000
+          "br": 128000,
+          "fid": 0,
+          "size": 3206061,
+          "vd": -44905,
+          "sr": 48000
       },
       "sq": {
-        "br": 1030408,
-        "fid": 0,
-        "size": 25803543,
-        "vd": -49164,
-        "sr": 48000
+          "br": 1030408,
+          "fid": 0,
+          "size": 25803543,
+          "vd": -49164,
+          "sr": 48000
       },
       "hr": {
-        "br": 1800307,
-        "fid": 0,
-        "size": 45080624,
-        "vd": -49164,
-        "sr": 48000
+          "br": 1800307,
+          "fid": 0,
+          "size": 45080624,
+          "vd": -49164,
+          "sr": 48000
       },
       "a": null,
       "cd": "01",
@@ -100,94 +191,6 @@ const defaultState = Map({
       "cp": 1416318,
       "mv": 0,
       "publishTime": 1749139200000
-    },
-    {
-      "name": "雅俗共赏",
-      "mainTitle": null,
-      "additionalTitle": null,
-      "id": 411214279,
-      "pst": 0,
-      "t": 0,
-      "ar": [
-        {
-          "id": 5771,
-          "name": "许嵩",
-          "tns": [],
-          "alias": []
-        }
-      ],
-      "alia": [],
-      "pop": 100,
-      "st": 0,
-      "rt": null,
-      "fee": 1,
-      "v": 76,
-      "crbt": null,
-      "cf": "",
-      "al": {
-        "id": 34749138,
-        "name": "青年晚报",
-        "picUrl": "https://p2.music.126.net/Wcs2dbukFx3TUWkRuxVCpw==/3431575794705764.jpg",
-        "tns": [],
-        "pic": 3431575794705764
-      },
-      "dt": 249621,
-      "h": {
-        "br": 320000,
-        "fid": 0,
-        "size": 9987178,
-        "vd": -51481,
-        "sr": 44100
-      },
-      "m": {
-        "br": 192000,
-        "fid": 0,
-        "size": 5992324,
-        "vd": -48882,
-        "sr": 44100
-      },
-      "l": {
-        "br": 128000,
-        "fid": 0,
-        "size": 3994897,
-        "vd": -47192,
-        "sr": 44100
-      },
-      "sq": {
-        "br": 896023,
-        "fid": 0,
-        "size": 27958351,
-        "vd": -51702,
-        "sr": 44100
-      },
-      "hr": null,
-      "a": null,
-      "cd": "1",
-      "no": 2,
-      "rtUrl": null,
-      "ftype": 0,
-      "rtUrls": [],
-      "djId": 0,
-      "copyright": 0,
-      "s_id": 0,
-      "mark": 17179877376,
-      "originCoverType": 1,
-      "originSongSimpleData": null,
-      "tagPicList": null,
-      "resourceState": true,
-      "version": 42,
-      "songJumpInfo": null,
-      "entertainmentTags": null,
-      "awardTags": null,
-      "displayTags": null,
-      "single": 0,
-      "noCopyrightRcmd": null,
-      "mv": 5302271,
-      "cp": 22036,
-      "rtype": 0,
-      "rurl": null,
-      "mst": 9,
-      "publishTime": 1461723397683
     },
     {
       "name": "莫愁乡",
