@@ -1,8 +1,9 @@
-import { getSongDetail } from '../../../services/player'
+import { getLyric, getSongDetail } from '../../../services/player'
 
 import * as actionTypes from './constants'
 
 import { getRandomNumber } from '../../../utils/math-utils'
+import { parseLyric } from '../../../utils/parse-lyric'
 
 const changeCurrentSongAction = (currentSong) => {
   return {
@@ -21,13 +22,17 @@ const changeCurrentSongIndexAction = (currentSongIndex) => ({
   currentSongIndex
 })
 
+const changeLyricAction = lyricArr => ({
+  type: actionTypes.CHANGE_LYRIC,
+  lyricArr
+})
+
 export const changePlayStrategyAction = playStrategy => ({
   type: actionTypes.CHANGE_PLAY_STRATEGY,
   playStrategy
 })
 
 export const switchSongAction = tag => {
-  console.log("tag:", tag)
   return (dispatch, getState) => {
     const playList = getState().player.get("playList")
     const playStrategy = getState().player.get("playStrategy")
@@ -36,8 +41,8 @@ export const switchSongAction = tag => {
 
     switch (playStrategy) {
       case 1: // 随机播放
-        let randomIndex = -1
-        while (randomIndex === currentSongIndex) {
+        let randomIndex = getRandomNumber(playList.length)
+        while (randomIndex === currentSongIndex) { // 如果随机到下一个依然是当前歌曲，再继续随机，一直到下一首是新的歌曲为止
           randomIndex = getRandomNumber(playList.length)
         }
         nextSongIndex = randomIndex
@@ -55,6 +60,9 @@ export const switchSongAction = tag => {
     const nextSong = playList[nextSongIndex]
     dispatch(changeCurrentSongIndexAction(nextSongIndex))
     dispatch(changeCurrentSongAction(nextSong))
+
+    // 取歌词
+    dispatch(getLyricAction(nextSong.id))
   }
 }
 
@@ -72,14 +80,33 @@ export const getSongDetailAction = (ids) => {
       // 播放列表中没有此歌曲，发送请求取歌曲信息
       getSongDetail(ids).then(res => {
         console.log(res)
-        const song = res.data.songs[0]
+        const song = res.data.songs && res.data.songs[0]
+        if (!song) {
+          return
+        }
+
+        // 将此新歌曲添加到播放列表中
         const newPlayList = [...playList]
         newPlayList.push(song)
+
+        // 更新各个值
         dispatch(changePlayListAction(newPlayList))
         dispatch(changeCurrentSongIndexAction(newPlayList.length - 1))
         dispatch(changeCurrentSongAction(song))
       })
     }
 
+    // 取歌词
+    dispatch(getLyricAction(ids))
+  }
+}
+
+export const getLyricAction = id => {
+  return dispatch => {
+    getLyric(id).then(res => {
+      console.log("lyric", res)
+      const lyricArr = parseLyric(res.data.lrc.lyric)
+      dispatch(changeLyricAction(lyricArr))
+    })
   }
 }

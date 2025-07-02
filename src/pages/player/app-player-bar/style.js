@@ -40,7 +40,7 @@ export const Control = styled.div`
     width: 36px;
     height: 36px;
     margin: 0 8px;
-    background-position: 0 ${props => props.isPlaying ? "-165px": "-204px"};
+    background-position: 0 ${props => props.$isplaying ? "-165px": "-204px"};
   }
 
   .next {

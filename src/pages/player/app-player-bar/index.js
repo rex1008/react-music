@@ -39,6 +39,11 @@ export default memo(function AppPlayerBar() {
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id)
+    audioRef.current.play().then(res => {
+      setIsPlaying(true)
+    }).catch(err => {
+      setIsPlaying(false)
+    })
   }, [currentSong])
 
   const duration = currentSong.dt || 0
@@ -53,6 +58,15 @@ export default memo(function AppPlayerBar() {
     if (!isChanging) {
       setCurrentTime(e.target.currentTime * 1000)
       setProgress(currentTime / currentSong.dt * 100)
+    }
+  }
+  
+  const handleMusicEnded = (e) => {
+    if (playStrategy === 2) { // 单曲循环
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+    } else {
+      switchSong(1) // 顺序播放和随机播放策略下，直接下一首即可
     }
   }
 
@@ -76,7 +90,6 @@ export default memo(function AppPlayerBar() {
   }, [duration])
 
   const sliderAfterChange = useCallback(value => {
-    console.log("aftervalue:", value)
     const ct = value / 100 * duration / 1000
     audioRef.current.currentTime = ct
     setCurrentTime(ct * 1000)
@@ -90,7 +103,7 @@ export default memo(function AppPlayerBar() {
   return (
     <PlaybarWrapper className='sprite_player'>
       <div className='content wrap-v2'>
-        <Control isPlaying={isPlaying}>
+        <Control $isplaying={isPlaying}>
           <button className='sprite_player prev' onClick={e => switchSong(-1)}></button>
           <button className='sprite_player play' onClick={e => playMusic()}></button>
           <button className='sprite_player next' onClick={e => switchSong(1)}></button>
@@ -132,7 +145,7 @@ export default memo(function AppPlayerBar() {
           </div>
         </Operator>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+      <audio ref={audioRef} onTimeUpdate={e => timeUpdate(e)} onEnded={e => handleMusicEnded()} />
     </PlaybarWrapper>
   )
 })

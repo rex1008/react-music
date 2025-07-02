@@ -32,7 +32,6 @@ export default memo(function NewAlbum() {
           <Carousel dots={false} ref={pageRef}>
             {
               [0, 1].map(pageIndex => {
-                console.log("pageindex", pageIndex)
                 return (
                   <div key={pageIndex} className='page'>
                     {

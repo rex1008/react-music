@@ -13,7 +13,6 @@ export default memo(function TopRanking(props) {
   const dispatch = useDispatch()
 
   const playMusic = item => {
-    console.log("点击播放")
     dispatch(getSongDetailAction(item.id))
   }
 

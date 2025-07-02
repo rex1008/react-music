@@ -57,5 +57,7 @@ export function getPlaySong(id) {
     return "https://music.163.com/song/media/outer/url?id=2711834126"
   } else if (id === 2712753039) {
     return "https://music.163.com/song/media/outer/url?id=2712753039"
+  } else {
+    return `https://music.163.com/song/media/outer/url?id=${id}`
   }
 }
