@@ -1,7 +1,8 @@
 import reducer from './reducer'
-import { getSongDetailAction } from './actionCreators'
+import { getSongDetailAction, changeIsFirstOpenAction } from './actionCreators'
 
 export {
   reducer,
-  getSongDetailAction
+  getSongDetailAction,
+  changeIsFirstOpenAction
 }

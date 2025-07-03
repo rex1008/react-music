@@ -10,9 +10,11 @@ import {
  } from './style'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { 
+  changeIsFirstOpenAction,
   getSongDetailAction,
   changePlayStrategyAction,
-  switchSongAction
+  switchSongAction,
+  changeCurrentLyricRowIndexAction
 } from '../store/actionCreators'
 import { getSizeImage, formatMinuteSecond, getPlaySong } from '../../../utils/format-utils'
 import { NavLink } from 'react-router-dom'
@@ -24,9 +26,18 @@ export default memo(function AppPlayerBar() {
   const [isChanging, setIsChaning] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
 
-  const { currentSong, playStrategy } = useSelector(state => ({
+  const { 
+    currentSong, 
+    playStrategy, 
+    lyricArr, 
+    isFirstOpen,
+    currentLyricRowIndex
+  } = useSelector(state => ({
     currentSong: state.player.get("currentSong"),
-    playStrategy: state.player.get("playStrategy")
+    playStrategy: state.player.get("playStrategy"),
+    lyricArr: state.player.get("lyricArr"),
+    isFirstOpen: state.player.get("isFirstOpen"),
+    currentLyricRowIndex: state.player.get("currentLyricRowIndex"),
   }), shallowEqual)
 
   const dispatch = useDispatch()
@@ -35,16 +46,20 @@ export default memo(function AppPlayerBar() {
 
   useEffect(() => {
     dispatch(getSongDetailAction(2720118279))
-  }, [dispatch ])
+  }, [dispatch])
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id)
+    console.log("isFirstOpen", isFirstOpen)
+    if (isFirstOpen) {
+      return
+    }
     audioRef.current.play().then(res => {
       setIsPlaying(true)
     }).catch(err => {
       setIsPlaying(false)
     })
-  }, [currentSong])
+  }, [currentSong, isFirstOpen])
 
   const duration = currentSong.dt || 0
   const showOfDuration = formatMinuteSecond(duration)
@@ -55,9 +70,24 @@ export default memo(function AppPlayerBar() {
   }, [isPlaying])
 
   const timeUpdate = (e) => {
+    const curTime = e.target.currentTime * 1000
     if (!isChanging) {
-      setCurrentTime(e.target.currentTime * 1000)
-      setProgress(currentTime / currentSong.dt * 100)
+      setCurrentTime(curTime)
+      setProgress(curTime / currentSong.dt * 100)
+    }
+
+    // 获取当前时间对应的歌词行
+    let index = 0
+    for (let i = 0; i < lyricArr.length; i++) {
+      if (curTime < lyricArr[i].time) {
+        index = i
+        break
+      }
+    }
+    if (currentLyricRowIndex !== index - 1) {
+      console.log(lyricArr[index - 1])
+      dispatch(changeCurrentLyricRowIndexAction(index - 1))
+      
     }
   }
   
@@ -80,6 +110,7 @@ export default memo(function AppPlayerBar() {
 
   const switchSong = tag => {
     dispatch(switchSongAction(tag))
+    dispatch(changeIsFirstOpenAction(false)) // 用户手动点击了按钮，将“是否第一次打开”标志置为false
   }
 
   const sliderChange = useCallback(value => {
@@ -133,7 +164,7 @@ export default memo(function AppPlayerBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator playstrategy={playStrategy}>
+        <Operator $playstrategy={playStrategy}>
           <div className="left">
             <button className="sprite_player btn favor"></button>
             <button className="sprite_player btn share"></button>

@@ -36,7 +36,7 @@ export default memo(function NewAlbum() {
                   <div key={pageIndex} className='page'>
                     {
                       newAlbums.slice(pageIndex * 5, (pageIndex + 1) * 5).map(item => {
-                        return <AlbumCover key={item.id} info={item} size={100} width={118} bgp="-570px" />
+                        return <AlbumCover key={item.id} info={item} size={100} width={118} $bgp="-570px" />
                       })
                     }
                   </div>

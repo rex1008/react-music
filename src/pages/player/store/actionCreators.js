@@ -5,6 +5,11 @@ import * as actionTypes from './constants'
 import { getRandomNumber } from '../../../utils/math-utils'
 import { parseLyric } from '../../../utils/parse-lyric'
 
+export const changeIsFirstOpenAction = (isFirstOpen) => ({
+  type: actionTypes.CHANGE_IS_FIRST_OPEN,
+  isFirstOpen
+})
+
 const changeCurrentSongAction = (currentSong) => {
   return {
     type: actionTypes.CHANGE_CURRENT_SONG,
@@ -30,6 +35,11 @@ const changeLyricAction = lyricArr => ({
 export const changePlayStrategyAction = playStrategy => ({
   type: actionTypes.CHANGE_PLAY_STRATEGY,
   playStrategy
+})
+
+export const changeCurrentLyricRowIndexAction = currentLyricRowIndex => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_ROW_INDEX,
+  currentLyricRowIndex
 })
 
 export const switchSongAction = tag => {

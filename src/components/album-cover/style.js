@@ -19,7 +19,7 @@ export const AlbumWrapper = styled.div`
       right: 0;
       top: 0;
       bottom: 0;
-      background-position: 0 ${props => props.bgp};
+      background-position: 0 ${props => props.$bgp};
       text-indent: -9999px;
     }
   }

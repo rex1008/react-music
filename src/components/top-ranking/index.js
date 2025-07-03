@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 
 import { getSizeImage } from '../../utils/format-utils'
-import { getSongDetailAction } from '../../pages/player/store'
+import { getSongDetailAction, changeIsFirstOpenAction } from '../../pages/player/store'
 
 import { TopRankingWrapper } from './style'
 import { useDispatch } from 'react-redux'
@@ -14,6 +14,7 @@ export default memo(function TopRanking(props) {
 
   const playMusic = item => {
     dispatch(getSongDetailAction(item.id))
+    dispatch(changeIsFirstOpenAction(false)) // 用户手动点击了按钮，将“是否第一次打开”标志置为false
   }
 
   return (

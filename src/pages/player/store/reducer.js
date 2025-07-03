@@ -3,6 +3,7 @@ import { Map } from 'immutable'
 import * as actionTypes from './constants'
 
 const defaultState = Map({
+  isFirstOpen: true, // 是否第一次打开
   playList: [
     {
       "name": "迷失情感迷宫",
@@ -291,11 +292,14 @@ const defaultState = Map({
   currentSongIndex: 0,
   currentSong: {},
   playStrategy: 0, // 0表示顺序播放 1表示随机播放 2表示单曲循环
-  lyricArr: []
+  lyricArr: [],
+  currentLyricRowIndex: 0
 })
 
 function reducer(state = defaultState, action) {
   switch(action.type) {
+    case actionTypes.CHANGE_IS_FIRST_OPEN:
+      return state.set("isFirstOpen", action.isFirstOpen)
     case actionTypes.CHANGE_CURRENT_SONG:
       return state.set("currentSong", action.currentSong)
     case actionTypes.CHANGE_PLAY_LIST:
@@ -306,6 +310,8 @@ function reducer(state = defaultState, action) {
       return state.set("playStrategy", action.playStrategy)
     case actionTypes.CHANGE_LYRIC:
       return state.set("lyricArr", action.lyricArr)
+    case actionTypes.CHANGE_CURRENT_LYRIC_ROW_INDEX:
+      return state.set("currentLyricRowIndex", action.currentLyricRowIndex)
     default:
       return state
   }

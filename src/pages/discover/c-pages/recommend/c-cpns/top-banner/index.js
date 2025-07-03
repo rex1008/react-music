@@ -36,7 +36,7 @@ export default memo(function TopBanner() {
   const bgImage = topBanners[currentIndex] && topBanners[currentIndex].imageUrl + "?imageView&blur=40x20"
 
   return (
-    <BannerWrapper bgimage={bgImage}>
+    <BannerWrapper $bgimage={bgImage}>
       <div className='banner wrap-v2'>
         <BannerLeft>
           <Carousel effect='fade' autoplay ref={bannerRef} afterChange={bannerChange}>
