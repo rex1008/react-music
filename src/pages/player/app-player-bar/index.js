@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 
-import { Slider } from 'antd'
+import { Slider, message } from 'antd'
 
 import { 
   PlaybarWrapper,
@@ -87,7 +87,15 @@ export default memo(function AppPlayerBar() {
     if (currentLyricRowIndex !== index - 1) {
       console.log(lyricArr[index - 1])
       dispatch(changeCurrentLyricRowIndexAction(index - 1))
-      
+
+      const content = lyricArr[index - 1] && lyricArr[index - 1].lyric
+      message.open({
+        // className: "lyric-class",
+        key: "lyric",
+        content: content,
+        duration: 0
+      })
+
     }
   }
   
